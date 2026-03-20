@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>ChemSphere — Inorganic & Analytical Chemistry</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg: #050d1a;
+  --bg2: #071225;
+  --bg3: #0a1930;
+  --card: #0d1f38;
+  --card2: #102540;
+  --border: rgba(255,255,255,0.07);
+  --teal: #00d4c8;
+  --teal-dim: #00a89e;
+  --teal-glow: rgba(0,212,200,0.15);
+  --gold: #f5c842;
+  --gold-dim: #c9a020;
+  --gold-glow: rgba(245,200,66,0.15);
+  --red: #ff4d4d;
+  --orange: #ff8c42;
+  --red-glow: rgba(255,77,77,0.15);
+  --purple: #9b59f5;
+  --purple-glow: rgba(155,89,245,0.15);
+  --text: #e8f0fe;
+  --text2: #9badc8;
+  --text3: #5c7a9e;
+  --white: #ffffff;
+  --nav-h: 64px;
+  --radius: 12px;
+  --radius-lg: 20px;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;line-height:1.6;overflow-x:hidden}
+::selection{background:var(--teal);color:#000}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bg2)}
+::-webkit-scrollbar-thumb{background:var(--teal-dim);border-radius:3px}
+
+/* ─── NAV ─── */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-h);background:rgba(5,13,26,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 2rem;gap:1.5rem}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:900;color:var(--teal);letter-spacing:-0.5px;white-space:nowrap;margin-right:auto}
+.nav-logo span{color:var(--gold)}
+.nav-links{display:flex;gap:0.2rem;align-items:center;flex-wrap:wrap}
+.nav-links a{color:var(--text2);text-decoration:none;font-size:0.8rem;font-weight:500;padding:0.35rem 0.65rem;border-radius:6px;transition:all 0.2s;white-space:nowrap;letter-spacing:0.3px;text-transform:uppercase}
+.nav-links a:hover,.nav-links a.active{color:var(--teal);background:var(--teal-glow)}
+.nav-admin-btn{background:linear-gradient(135deg,var(--teal),var(--teal-dim));color:#000;border:none;padding:0.35rem 0.9rem;border-radius:6px;font-size:0.8rem;font-weight:600;cursor:pointer;white-space:nowrap;transition:opacity 0.2s;font-family:'DM Sans',sans-serif}
+.nav-admin-btn:hover{opacity:0.85}
+.nav-admin-btn.active{background:linear-gradient(135deg,var(--gold),var(--gold-dim));color:#000}
+.hamburger{display:none;flex-direction:column;gap:4px;cursor:pointer;padding:4px}
+.hamburger span{width:22px;height:2px;background:var(--text2);border-radius:2px;transition:0.3s}
+
+/* ─── SECTIONS ─── */
+section{min-height:100vh;padding:calc(var(--nav-h) + 4rem) 2rem 4rem;max-width:1400px;margin:0 auto}
+.section-full{max-width:100%;padding-left:0;padding-right:0}
+.section-inner{max-width:1400px;margin:0 auto;padding:0 2rem}
+
+.section-tag{display:inline-flex;align-items:center;gap:0.5rem;font-size:0.72rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:0.4rem 1rem;border-radius:20px;margin-bottom:1.5rem}
+.tag-teal{background:var(--teal-glow);color:var(--teal);border:1px solid rgba(0,212,200,0.3)}
+.tag-gold{background:var(--gold-glow);color:var(--gold);border:1px solid rgba(245,200,66,0.3)}
+.tag-red{background:var(--red-glow);color:var(--red);border:1px solid rgba(255,77,77,0.3)}
+.tag-purple{background:var(--purple-glow);color:var(--purple);border:1px solid rgba(155,89,245,0.3)}
+
+h1,h2,h3,h4{font-family:'Playfair Display',serif;line-height:1.2}
+.section-title{font-size:clamp(2rem,4vw,3rem);font-weight:900;margin-bottom:0.5rem}
+.section-sub{color:var(--text2);font-size:1rem;margin-bottom:3rem;max-width:600px}
+
+/* ─── HOME ─── */
+#home{display:flex;flex-direction:column;justify-content:center;min-height:100vh;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 80% 60% at 60% 40%, rgba(0,212,200,0.06) 0%, transparent 60%), radial-gradient(ellipse 60% 40% at 80% 80%, rgba(245,200,66,0.05) 0%, transparent 50%)}
+.hero-grid{position:absolute;inset:0;z-index:0;background-image:linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px);background-size:60px 60px}
+.hero-content{position:relative;z-index:1}
+.hero-eyebrow{font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:var(--teal);letter-spacing:3px;text-transform:uppercase;margin-bottom:1rem;opacity:0.9}
+.hero-title{font-size:clamp(2.5rem,6vw,5rem);font-weight:900;line-height:1.05;margin-bottom:1.5rem}
+.hero-title .line2{color:var(--teal)}
+.hero-title .line3{color:var(--gold);font-style:italic}
+.hero-quote{font-size:1rem;color:var(--text2);border-left:3px solid var(--teal);padding-left:1.2rem;margin-bottom:2.5rem;max-width:560px;font-style:italic;line-height:1.7}
+.hero-mphil{display:inline-flex;align-items:center;gap:0.6rem;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:0.6rem 1.2rem;font-size:0.85rem;color:var(--text2);margin-bottom:3rem}
+.hero-mphil strong{color:var(--gold)}
+.hero-badges{display:flex;gap:1.5rem;flex-wrap:wrap}
+.hero-badge{display:flex;align-items:center;gap:0.75rem;padding:1rem 1.5rem;border-radius:var(--radius);border:1px solid;font-weight:600;font-size:0.95rem}
+.badge-inorganic{background:rgba(0,212,200,0.08);border-color:rgba(0,212,200,0.3);color:var(--teal)}
+.badge-analytical{background:rgba(245,200,66,0.08);border-color:rgba(245,200,66,0.3);color:var(--gold)}
+.badge-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.2rem}
+.badge-inorganic .badge-icon{background:var(--teal-glow)}
+.badge-analytical .badge-icon{background:var(--gold-glow)}
+.hero-scroll{position:absolute;bottom:3rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:0.5rem;color:var(--text3);font-size:0.75rem;letter-spacing:1px;text-transform:uppercase;animation:bounce 2s infinite}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+
+/* ─── TOPICS ─── */
+.topics-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:2rem}
+.topic-col-header{display:flex;align-items:center;gap:0.75rem;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:2px solid}
+.teal-border{border-color:var(--teal)}
+.gold-border{border-color:var(--gold)}
+.topic-col-title{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700}
+.topic-cards{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem}
+.topic-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.1rem;cursor:pointer;transition:all 0.25s;position:relative;overflow:hidden}
+.topic-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;opacity:0;transition:opacity 0.25s}
+.topic-card.tc-teal::before{background:var(--teal)}
+.topic-card.tc-gold::before{background:var(--gold)}
+.topic-card:hover{transform:translateY(-3px);border-color:rgba(255,255,255,0.15)}
+.topic-card.tc-teal:hover{box-shadow:0 8px 30px rgba(0,212,200,0.12)}
+.topic-card.tc-gold:hover{box-shadow:0 8px 30px rgba(245,200,66,0.12)}
+.topic-card:hover::before{opacity:1}
+.topic-card-icon{font-size:1.5rem;margin-bottom:0.5rem}
+.topic-card-name{font-weight:600;font-size:0.9rem;color:var(--text)}
+.topic-card-desc{font-size:0.75rem;color:var(--text3);margin-top:0.25rem}
+
+/* ─── NOTES ─── */
+.filter-bar{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:2rem}
+.filter-btn{background:var(--card);border:1px solid var(--border);color:var(--text2);padding:0.4rem 1rem;border-radius:20px;cursor:pointer;font-size:0.82rem;font-weight:500;transition:all 0.2s;font-family:'DM Sans',sans-serif}
+.filter-btn:hover,.filter-btn.active{background:var(--teal-glow);border-color:rgba(0,212,200,0.4);color:var(--teal)}
+.filter-btn.gold-filter.active{background:var(--gold-glow);border-color:rgba(245,200,66,0.4);color:var(--gold)}
+.notes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.2rem}
+.note-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;display:flex;flex-direction:column;gap:0.75rem;transition:all 0.25s;position:relative;overflow:hidden}
+.note-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px}
+.note-card.nc-teal::after{background:linear-gradient(90deg,var(--teal),transparent)}
+.note-card.nc-gold::after{background:linear-gradient(90deg,var(--gold),transparent)}
+.note-card:hover{transform:translateY(-4px);border-color:rgba(255,255,255,0.12)}
+.note-icon{font-size:1.8rem}
+.note-title{font-weight:600;font-size:1rem;color:var(--text)}
+.note-meta{display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap}
+.note-tag{font-size:0.7rem;font-weight:600;padding:0.25rem 0.6rem;border-radius:20px;letter-spacing:0.5px;text-transform:uppercase}
+.nt-inorganic{background:var(--teal-glow);color:var(--teal)}
+.nt-analytical{background:var(--gold-glow);color:var(--gold)}
+.note-pages{font-size:0.75rem;color:var(--text3)}
+.btn-download{display:flex;align-items:center;gap:0.5rem;background:linear-gradient(135deg,var(--teal),var(--teal-dim));color:#000;border:none;padding:0.55rem 1rem;border-radius:8px;font-size:0.82rem;font-weight:600;cursor:pointer;transition:opacity 0.2s;text-decoration:none;justify-content:center;font-family:'DM Sans',sans-serif;margin-top:auto}
+.btn-download:hover{opacity:0.85}
+.btn-download.gold{background:linear-gradient(135deg,var(--gold),var(--gold-dim))}
+
+/* Admin upload */
+.admin-zone{background:var(--card2);border:2px dashed rgba(245,200,66,0.3);border-radius:var(--radius-lg);padding:2rem;margin-top:3rem;display:none}
+.admin-zone.visible{display:block}
+.admin-zone h3{font-family:'Playfair Display',serif;color:var(--gold);margin-bottom:1rem;font-size:1.2rem}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.form-group{display:flex;flex-direction:column;gap:0.4rem}
+.form-group label{font-size:0.78rem;color:var(--text2);font-weight:500;letter-spacing:0.5px;text-transform:uppercase}
+.form-group input,.form-group select,.form-group textarea{background:var(--bg3);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:0.6rem 0.9rem;font-size:0.88rem;font-family:'DM Sans',sans-serif;transition:border-color 0.2s;outline:none}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--teal)}
+.form-group select option{background:var(--bg3)}
+.btn-primary{background:linear-gradient(135deg,var(--teal),var(--teal-dim));color:#000;border:none;padding:0.65rem 1.5rem;border-radius:8px;font-size:0.9rem;font-weight:600;cursor:pointer;transition:opacity 0.2s;font-family:'DM Sans',sans-serif}
+.btn-primary:hover{opacity:0.85}
+.btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold-dim));color:#000}
+
+/* ─── Q&A BOARD ─── */
+.qa-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.75rem;margin-bottom:1.2rem;border-left:4px solid var(--teal);transition:all 0.25s}
+.qa-card.analytical{border-left-color:var(--gold)}
+.qa-question{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--text);margin-bottom:0.75rem}
+.qa-answer{color:var(--text2);font-size:0.92rem;line-height:1.7;margin-bottom:1rem}
+.qa-image{max-width:100%;border-radius:8px;margin-bottom:1rem;max-height:300px;object-fit:cover}
+.qa-footer{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.qa-date{font-size:0.75rem;color:var(--text3);font-family:'JetBrains Mono',monospace}
+.helpful-btn{background:none;border:1px solid var(--border);color:var(--text2);padding:0.3rem 0.8rem;border-radius:20px;font-size:0.78rem;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:0.4rem;font-family:'DM Sans',sans-serif}
+.helpful-btn:hover,.helpful-btn.clicked{background:var(--teal-glow);border-color:rgba(0,212,200,0.3);color:var(--teal)}
+
+/* ─── ADVANCED ZONE ─── */
+#advanced{background:linear-gradient(180deg,var(--bg) 0%,#0d0500 100%)}
+.adv-header{text-align:center;padding:3rem 2rem;border-bottom:1px solid rgba(255,77,77,0.15);margin-bottom:3rem}
+.adv-warning{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(255,77,77,0.1);border:1px solid rgba(255,77,77,0.3);color:var(--red);padding:0.4rem 1rem;border-radius:20px;font-size:0.78rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:1.5rem}
+.adv-tabs{display:flex;gap:1rem;margin-bottom:2rem;flex-wrap:wrap}
+.adv-tab{background:var(--card);border:1px solid var(--border);color:var(--text2);padding:0.6rem 1.5rem;border-radius:8px;cursor:pointer;font-weight:600;font-size:0.88rem;transition:all 0.2s;font-family:'DM Sans',sans-serif}
+.adv-tab.active{background:rgba(255,77,77,0.15);border-color:rgba(255,77,77,0.4);color:var(--red)}
+.tricky-card{background:linear-gradient(135deg,#1a0a0a,#120505);border:1px solid rgba(255,77,77,0.2);border-radius:var(--radius-lg);padding:1.75rem;margin-bottom:1.2rem;border-top:3px solid var(--red)}
+.diff-badge{display:inline-block;padding:0.2rem 0.6rem;border-radius:4px;font-size:0.7rem;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:0.75rem}
+.diff-hard{background:rgba(255,140,66,0.2);color:var(--orange)}
+.diff-expert{background:rgba(255,77,77,0.2);color:var(--red)}
+.tricky-q{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;margin-bottom:1rem;color:var(--text)}
+.tricky-answer{background:rgba(0,0,0,0.3);border:1px solid rgba(255,77,77,0.15);border-radius:8px;padding:1rem;margin-bottom:1rem;color:var(--text2);font-size:0.9rem;display:none;line-height:1.7}
+.tricky-answer.shown{display:block;animation:fadeIn 0.3s ease}
+.btn-reveal{background:rgba(255,77,77,0.15);border:1px solid rgba(255,77,77,0.3);color:var(--red);padding:0.4rem 1rem;border-radius:6px;cursor:pointer;font-size:0.82rem;font-weight:600;transition:all 0.2s;font-family:'DM Sans',sans-serif}
+.btn-reveal:hover{background:rgba(255,77,77,0.25)}
+.stumped-btn{background:none;border:1px solid var(--border);color:var(--text3);padding:0.3rem 0.8rem;border-radius:20px;font-size:0.78rem;cursor:pointer;transition:all 0.2s;font-family:'DM Sans',sans-serif}
+.stumped-btn:hover{color:var(--orange);border-color:var(--orange)}
+
+/* Dangerous chemistry */
+.danger-card{background:linear-gradient(135deg,#0d0800,#1a0f00);border:1px solid rgba(255,140,66,0.2);border-radius:var(--radius-lg);padding:1.75rem;margin-bottom:1.2rem;border-top:3px solid var(--orange)}
+.danger-badge{display:inline-flex;align-items:center;gap:0.4rem;padding:0.25rem 0.75rem;border-radius:20px;font-size:0.72rem;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:1rem}
+.dl-caution{background:rgba(255,200,50,0.15);color:#ffd700;border:1px solid rgba(255,200,50,0.3)}
+.dl-hazardous{background:rgba(255,140,66,0.15);color:var(--orange);border:1px solid rgba(255,140,66,0.3)}
+.dl-extreme{background:rgba(255,77,77,0.15);color:var(--red);border:1px solid rgba(255,77,77,0.3)}
+.danger-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;margin-bottom:0.75rem;color:var(--text)}
+.danger-body{color:var(--text2);font-size:0.9rem;line-height:1.7}
+
+/* ─── DISCUSSION BOARD ─── */
+.disc-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;margin-bottom:1.2rem;border-left:4px solid var(--purple);transition:all 0.25s}
+.disc-card:hover{border-color:rgba(255,255,255,0.12)}
+.disc-meta{display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:0.75rem}
+.disc-name{font-weight:600;color:var(--text);font-size:0.95rem}
+.disc-time{font-size:0.73rem;color:var(--text3);font-family:'JetBrains Mono',monospace}
+.disc-topic-tag{font-size:0.7rem;font-weight:600;padding:0.2rem 0.55rem;border-radius:20px;text-transform:uppercase;letter-spacing:0.5px}
+.dt-inorganic{background:var(--teal-glow);color:var(--teal)}
+.dt-analytical{background:var(--gold-glow);color:var(--gold)}
+.dt-general{background:var(--purple-glow);color:var(--purple)}
+.disc-message{color:var(--text2);font-size:0.92rem;line-height:1.65;margin-bottom:1rem}
+.disc-actions{display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap}
+.disc-action-btn{background:none;border:1px solid var(--border);color:var(--text3);padding:0.25rem 0.7rem;border-radius:20px;font-size:0.78rem;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:0.35rem;font-family:'DM Sans',sans-serif}
+.disc-action-btn:hover{color:var(--purple);border-color:var(--purple);background:var(--purple-glow)}
+.disc-action-btn.liked{color:var(--purple);border-color:var(--purple);background:var(--purple-glow)}
+.disc-action-btn.delete{color:var(--text3)}
+.disc-action-btn.delete:hover{color:var(--red);border-color:var(--red);background:var(--red-glow)}
+.replies-section{margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border)}
+.reply-card{background:var(--bg3);border-radius:8px;padding:0.9rem;margin-bottom:0.5rem;border-left:2px solid var(--purple)}
+.reply-name{font-weight:600;font-size:0.85rem;color:var(--text);margin-bottom:0.3rem}
+.reply-msg{font-size:0.85rem;color:var(--text2)}
+.reply-form{display:flex;gap:0.5rem;margin-top:0.75rem}
+.reply-form input{flex:1;background:var(--bg3);border:1px solid var(--border);color:var(--text);border-radius:6px;padding:0.5rem 0.75rem;font-size:0.85rem;font-family:'DM Sans',sans-serif;outline:none}
+.reply-form input:focus{border-color:var(--purple)}
+.reply-form button{background:var(--purple-glow);border:1px solid rgba(155,89,245,0.3);color:var(--purple);padding:0.5rem 1rem;border-radius:6px;cursor:pointer;font-size:0.82rem;font-weight:600;font-family:'DM Sans',sans-serif}
+
+/* Post form */
+.post-form{background:var(--card2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.75rem;margin-bottom:2rem}
+.post-form h3{font-family:'Playfair Display',serif;font-size:1.15rem;margin-bottom:1.2rem;color:var(--text)}
+
+/* ─── ABOUT ─── */
+.about-grid{display:grid;grid-template-columns:1fr 2fr;gap:4rem;align-items:start}
+.about-photo{aspect-ratio:3/4;background:var(--card);border-radius:var(--radius-lg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:4rem;overflow:hidden}
+.about-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:2rem}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.2rem;text-align:center}
+.stat-num{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:900;color:var(--teal)}
+.stat-label{font-size:0.78rem;color:var(--text2);text-transform:uppercase;letter-spacing:1px}
+
+/* ─── CONTACT ─── */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+.contact-form{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:2rem}
+.contact-info{padding-top:1rem}
+.contact-item{display:flex;gap:1rem;align-items:flex-start;margin-bottom:1.5rem}
+.contact-icon{width:40px;height:40px;background:var(--teal-glow);border:1px solid rgba(0,212,200,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.contact-text h4{font-size:0.88rem;color:var(--text);margin-bottom:0.2rem}
+.contact-text p{font-size:0.82rem;color:var(--text2)}
+
+/* ─── ADMIN PANEL ─── */
+.admin-panel{background:var(--card2);border:2px dashed rgba(245,200,66,0.3);border-radius:var(--radius-lg);padding:2rem;margin-top:3rem;display:none}
+.admin-panel.visible{display:block;animation:fadeIn 0.3s}
+.admin-panel h3{font-family:'Playfair Display',serif;color:var(--gold);margin-bottom:1.5rem}
+
+/* ─── MODAL ─── */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:2000;display:flex;align-items:center;justify-content:center;padding:2rem;backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:opacity 0.3s}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:2.5rem;max-width:420px;width:100%;position:relative}
+.modal h2{font-family:'Playfair Display',serif;font-size:1.5rem;margin-bottom:0.5rem}
+.modal p{color:var(--text2);font-size:0.88rem;margin-bottom:1.5rem}
+.modal-close{position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--text2);font-size:1.2rem;cursor:pointer;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:6px;transition:all 0.2s}
+.modal-close:hover{background:var(--red-glow);color:var(--red)}
+.pw-input{width:100%;background:var(--bg3);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:0.75rem 1rem;font-size:1rem;font-family:'DM Sans',sans-serif;outline:none;margin-bottom:1rem}
+.pw-input:focus{border-color:var(--teal)}
+.pw-error{color:var(--red);font-size:0.82rem;margin-bottom:0.5rem;display:none}
+
+/* ─── TOAST ─── */
+.toast-container{position:fixed;bottom:2rem;right:2rem;z-index:3000;display:flex;flex-direction:column;gap:0.5rem}
+.toast{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:0.8rem 1.2rem;font-size:0.85rem;color:var(--text);box-shadow:0 8px 30px rgba(0,0,0,0.4);display:flex;align-items:center;gap:0.6rem;animation:slideIn 0.3s ease;max-width:320px}
+.toast.success{border-left:3px solid var(--teal)}
+.toast.error{border-left:3px solid var(--red)}
+.toast.info{border-left:3px solid var(--gold)}
+@keyframes slideIn{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
+@keyframes slideOut{from{transform:translateX(0);opacity:1}to{transform:translateX(100%);opacity:0}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* ─── MISC ─── */
+.divider{height:1px;background:var(--border);margin:4rem 0}
+.empty-state{text-align:center;padding:3rem;color:var(--text3)}
+.empty-state .empty-icon{font-size:3rem;margin-bottom:1rem}
+.full-form-group{grid-column:1/-1}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:900px){
+  .topics-grid{grid-template-columns:1fr}
+  .about-grid{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+  .form-grid{grid-template-columns:1fr}
+}
+@media(max-width:768px){
+  nav{padding:0 1rem;gap:0.75rem}
+  .nav-links{display:none;position:fixed;top:var(--nav-h);left:0;right:0;background:rgba(5,13,26,0.98);flex-direction:column;padding:1rem;gap:0.25rem;border-bottom:1px solid var(--border)}
+  .nav-links.open{display:flex}
+  .hamburger{display:flex}
+  section{padding:calc(var(--nav-h) + 2rem) 1rem 2rem}
+  .topic-cards{grid-template-columns:1fr}
+  .hero-badges{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <div class="nav-logo">Chem<span>Sphere</span></div>
+  <div class="nav-links" id="navLinks">
+    <a href="#home" onclick="closeMenu()">Home</a>
+    <a href="#topics" onclick="closeMenu()">Topics</a>
+    <a href="#notes" onclick="closeMenu()">Notes</a>
+    <a href="#qa" onclick="closeMenu()">Ask Teacher</a>
+    <a href="#advanced" onclick="closeMenu()">Challenge Zone</a>
+    <a href="#discussion" onclick="closeMenu()">Discussion</a>
+    <a href="#about" onclick="closeMenu()">About</a>
+    <a href="#contact" onclick="closeMenu()">Contact</a>
+  </div>
+  <button class="nav-admin-btn" id="navAdminBtn" onclick="handleAdminBtn()">⚗ Admin Login</button>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MODAL: Admin Login -->
+<div class="modal-overlay" id="adminModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h2>Admin Access</h2>
+    <p>Enter the teacher password to unlock all admin features across the site.</p>
+    <input type="password" class="pw-input" id="adminPwInput" placeholder="Enter password…" onkeydown="if(event.key==='Enter')verifyAdmin()"/>
+    <div class="pw-error" id="pwError">Incorrect password. Please try again.</div>
+    <button class="btn-primary" onclick="verifyAdmin()" style="width:100%">Unlock Admin</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- ────────────────────── HOME ────────────────────── -->
+<section id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">⚗ Chemistry Education Platform</div>
+    <h1 class="hero-title">
+      Explore the<br>
+      <span class="line2">Molecular World</span><br>
+      <span class="line3">with Precision</span>
+    </h1>
+    <p class="hero-quote">"Chemistry is the science that deals with the composition, structure, and properties of matter — and in its inorganic and analytical forms, it reveals the hidden architecture of the universe itself."</p>
+    <div class="hero-mphil">🎓 Your teacher is currently pursuing <strong>M.Phil in Inorganic Analytical Chemistry</strong>
+    </div>
+    <div class="hero-badges">
+      <div class="hero-badge badge-inorganic">
+        <div class="badge-icon">⚛</div>
+        <div>
+          <div style="font-size:0.75rem;opacity:0.7;font-weight:400">Subject 01</div>
+          Inorganic Chemistry
+        </div>
+      </div>
+      <div class="hero-badge badge-analytical">
+        <div class="badge-icon">🔬</div>
+        <div>
+          <div style="font-size:0.75rem;opacity:0.7;font-weight:400">Subject 02</div>
+          Analytical Chemistry
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">↓ Scroll to explore</div>
+</section>
+
+<!-- ────────────────────── TOPICS ────────────────────── -->
+<section id="topics">
+  <div class="section-tag tag-teal">⚛ Curriculum</div>
+  <h2 class="section-title">Course Topics</h2>
+  <p class="section-sub">A structured overview of all topics covered across both subjects — from fundamentals to advanced concepts.</p>
+  <div class="topics-grid">
+    <div>
+      <div class="topic-col-header teal-border">
+        <span style="font-size:1.5rem">⚛</span>
+        <h3 class="topic-col-title" style="color:var(--teal)">Inorganic Chemistry</h3>
+      </div>
+      <div class="topic-cards" id="inorganicCards"></div>
+    </div>
+    <div>
+      <div class="topic-col-header gold-border">
+        <span style="font-size:1.5rem">🔬</span>
+        <h3 class="topic-col-title" style="color:var(--gold)">Analytical Chemistry</h3>
+      </div>
+      <div class="topic-cards" id="analyticalCards"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ────────────────────── NOTES ────────────────────── -->
+<section id="notes">
+  <div class="section-tag tag-teal">📄 Resources</div>
+  <h2 class="section-title">Notes &amp; Resources</h2>
+  <p class="section-sub">Download comprehensive study notes curated by your teacher. Filter by subject to find exactly what you need.</p>
+  <div class="filter-bar" id="notesFilter">
+    <button class="filter-btn active" onclick="filterNotes('all',this)">All</button>
+    <button class="filter-btn" onclick="filterNotes('inorganic',this)">⚛ Inorganic</button>
+    <button class="filter-btn gold-filter" onclick="filterNotes('analytical',this)">🔬 Analytical</button>
+  </div>
+  <div class="notes-grid" id="notesGrid"></div>
+
+  <!-- Admin upload zone -->
+  <div class="admin-zone" id="notesAdminZone">
+    <h3>📤 Upload New Note</h3>
+    <div class="form-grid">
+      <div class="form-group"><label>Note Title</label><input type="text" id="noteTitle" placeholder="e.g. Coordination Compounds Ch.3"/></div>
+      <div class="form-group"><label>Subject</label>
+        <select id="noteSubject">
+          <option value="inorganic">Inorganic Chemistry</option>
+          <option value="analytical">Analytical Chemistry</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Page Count</label><input type="number" id="notePages" placeholder="e.g. 24"/></div>
+      <div class="form-group"><label>Google Drive PDF URL</label><input type="text" id="noteDriveUrl" placeholder="https://drive.google.com/..."/></div>
+      <div class="form-group full-form-group"><label>Upload PDF from Device</label><input type="file" id="notePdfFile" accept=".pdf" style="cursor:pointer"/></div>
+    </div>
+    <button class="btn-primary" style="margin-top:1rem" onclick="addNote()">Add Note Card</button>
+  </div>
+</section>
+
+<!-- ────────────────────── Q&A BOARD ────────────────────── -->
+<section id="qa">
+  <div class="section-tag tag-teal">💬 Ask the Teacher</div>
+  <h2 class="section-title">Q&amp;A Board</h2>
+  <p class="section-sub">Curated answers to common chemistry questions, posted by your teacher. Click "I found this helpful" to show appreciation.</p>
+  <div class="filter-bar" id="qaFilter">
+    <button class="filter-btn active" onclick="filterQA('all',this)">All</button>
+    <button class="filter-btn" onclick="filterQA('inorganic',this)">⚛ Inorganic</button>
+    <button class="filter-btn gold-filter" onclick="filterQA('analytical',this)">🔬 Analytical</button>
+  </div>
+  <div id="qaBoard"></div>
+
+  <div class="admin-panel" id="qaAdminPanel">
+    <h3>📝 Post New Q&amp;A</h3>
+    <div class="form-grid">
+      <div class="form-group full-form-group"><label>Question</label><textarea id="qaQuestion" rows="2" placeholder="Enter the question…"></textarea></div>
+      <div class="form-group full-form-group"><label>Answer</label><textarea id="qaAnswer" rows="4" placeholder="Provide the answer…"></textarea></div>
+      <div class="form-group"><label>Topic Tag</label>
+        <select id="qaTag">
+          <option value="inorganic">Inorganic Chemistry</option>
+          <option value="analytical">Analytical Chemistry</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Image (optional)</label><input type="file" id="qaImage" accept="image/*"/></div>
+    </div>
+    <button class="btn-primary" style="margin-top:1rem" onclick="postQA()">Post Q&amp;A</button>
+  </div>
+</section>
+
+<!-- ────────────────────── ADVANCED ZONE ────────────────────── -->
+<section id="advanced" class="section-full">
+  <div class="section-inner">
+    <div class="adv-header">
+      <div class="adv-warning">⚠ Advanced Challenge Zone — Difficulty Level: Expert</div>
+      <h2 class="section-title" style="color:var(--red)">Advanced Challenge Zone</h2>
+      <p style="color:var(--text2);max-width:560px;margin:0 auto">Push your chemical reasoning to its limits. Mind-bending questions, hidden answers, and a deep dive into chemistry's most dangerous corners.</p>
+    </div>
+    <div class="adv-tabs">
+      <button class="adv-tab active" onclick="showAdvTab('tricky',this)">🧠 Part A — Tricky Questions</button>
+      <button class="adv-tab" onclick="showAdvTab('danger',this)">☣ Part B — Dangerous Chemistry</button>
+    </div>
+    <div id="trickySection">
+      <div class="filter-bar">
+        <button class="filter-btn active" onclick="filterTricky('all',this)">All</button>
+        <button class="filter-btn" onclick="filterTricky('inorganic',this)">⚛ Inorganic</button>
+        <button class="filter-btn gold-filter" onclick="filterTricky('analytical',this)">🔬 Analytical</button>
+      </div>
+      <div id="trickyBoard"></div>
+    </div>
+    <div id="dangerSection" style="display:none">
+      <div id="dangerBoard"></div>
+    </div>
+
+    <div class="admin-panel" id="advAdminPanel">
+      <h3>⚙ Post to Advanced Zone</h3>
+      <div class="form-grid">
+        <div class="form-group"><label>Post Type</label>
+          <select id="advType" onchange="updateAdvForm()">
+            <option value="tricky">Tricky Question</option>
+            <option value="danger">Dangerous Chemistry</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Topic Tag</label>
+          <select id="advTag">
+            <option value="inorganic">Inorganic</option>
+            <option value="analytical">Analytical</option>
+          </select>
+        </div>
+        <div class="form-group full-form-group adv-tricky-field"><label>Question</label><textarea id="advQuestion" rows="2" placeholder="The tricky question…"></textarea></div>
+        <div class="form-group full-form-group adv-tricky-field"><label>Answer (hidden until revealed)</label><textarea id="advAnswer" rows="3" placeholder="Answer revealed when student clicks…"></textarea></div>
+        <div class="form-group adv-tricky-field"><label>Difficulty</label>
+          <select id="advDiff">
+            <option value="hard">Hard</option>
+            <option value="expert">Expert</option>
+          </select>
+        </div>
+        <div class="form-group full-form-group adv-danger-field" style="display:none"><label>Chemistry Title</label><input type="text" id="advDangerTitle" placeholder="e.g. Fluorine Reactivity"/></div>
+        <div class="form-group full-form-group adv-danger-field" style="display:none"><label>Educational Explanation</label><textarea id="advDangerBody" rows="4" placeholder="Explain the chemistry and why it is dangerous…"></textarea></div>
+        <div class="form-group adv-danger-field" style="display:none"><label>Danger Level</label>
+          <select id="advDangerLevel">
+            <option value="caution">Caution</option>
+            <option value="hazardous">Hazardous</option>
+            <option value="extreme">Extreme</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn-primary" style="margin-top:1rem;background:linear-gradient(135deg,var(--red),#c00)" onclick="postAdvanced()">Post to Challenge Zone</button>
+    </div>
+  </div>
+</section>
+
+<!-- ────────────────────── DISCUSSION ────────────────────── -->
+<section id="discussion">
+  <div class="section-tag tag-purple">💬 Community</div>
+  <h2 class="section-title">Discussion Board</h2>
+  <p class="section-sub">Ask questions, share ideas, and discuss chemistry with your peers. All posts are stored locally.</p>
+
+  <div class="post-form">
+    <h3>Start a Discussion</h3>
+    <div class="form-grid">
+      <div class="form-group"><label>Your Name</label><input type="text" id="discName" placeholder="Your name…"/></div>
+      <div class="form-group"><label>Topic</label>
+        <select id="discTopic">
+          <option value="general">General</option>
+          <option value="inorganic">Inorganic Chemistry</option>
+          <option value="analytical">Analytical Chemistry</option>
+        </select>
+      </div>
+      <div class="form-group full-form-group"><label>Message</label><textarea id="discMessage" rows="3" placeholder="Share your thoughts, ask a question…"></textarea></div>
+    </div>
+    <button class="btn-primary" style="margin-top:1rem;background:linear-gradient(135deg,var(--purple),#7b3fd6)" onclick="postDisc()">Post</button>
+  </div>
+
+  <div class="filter-bar" id="discFilter">
+    <button class="filter-btn active" onclick="filterDisc('all',this)">All</button>
+    <button class="filter-btn" onclick="filterDisc('inorganic',this)">⚛ Inorganic</button>
+    <button class="filter-btn gold-filter" onclick="filterDisc('analytical',this)">🔬 Analytical</button>
+    <button class="filter-btn" onclick="filterDisc('general',this)" style="">General</button>
+  </div>
+  <div id="discBoard"></div>
+</section>
+
+<!-- ────────────────────── ABOUT ────────────────────── -->
+<section id="about">
+  <div class="section-tag tag-teal">👩‍🔬 About</div>
+  <h2 class="section-title">About the Teacher</h2>
+  <div class="about-grid" style="margin-top:2rem">
+    <div>
+      <div class="about-photo">👩‍🔬</div>
+      <div class="about-stats" id="aboutStats"></div>
+    </div>
+    <div>
+      <div class="section-tag tag-gold" style="margin-top:0">M.Phil — Inorganic Analytical Chemistry</div>
+      <h3 style="font-family:'Playfair Display',serif;font-size:2rem;margin-bottom:1rem">A Chemist's Journey</h3>
+      <p style="color:var(--text2);margin-bottom:1rem;line-height:1.8">Welcome to ChemSphere. I am a passionate chemistry educator currently pursuing my <strong style="color:var(--gold)">M.Phil in Inorganic Analytical Chemistry</strong>, dedicated to making complex chemical concepts accessible and engaging for every student.</p>
+      <p style="color:var(--text2);margin-bottom:1.5rem;line-height:1.8">My research focuses on the intersection of inorganic synthesis and analytical techniques — a field that bridges the molecular architecture of matter with the precision of measurement science. I believe that true understanding in chemistry comes not from memorization, but from developing intuition about why atoms and molecules behave the way they do.</p>
+      <blockquote style="border-left:3px solid var(--teal);padding-left:1.2rem;font-style:italic;color:var(--text2);margin-bottom:1.5rem;line-height:1.7">"Every element on the periodic table tells a story. Every titration reveals a truth. My goal is to help you read those stories and discover those truths for yourself."</blockquote>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap">
+        <div class="section-tag tag-teal">⚛ Inorganic Chemistry</div>
+        <div class="section-tag tag-gold">🔬 Analytical Methods</div>
+        <div class="section-tag tag-purple">📊 Research</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ────────────────────── CONTACT ────────────────────── -->
+<section id="contact">
+  <div class="section-tag tag-gold">✉ Contact</div>
+  <h2 class="section-title">Get in Touch</h2>
+  <p class="section-sub">Have a chemistry question or want to collaborate? Reach out through the form below.</p>
+  <div class="contact-grid">
+    <div class="contact-form">
+      <h3 style="font-family:'Playfair Display',serif;margin-bottom:1.5rem">Send a Message</h3>
+      <div class="form-grid">
+        <div class="form-group"><label>Full Name</label><input type="text" id="cName" placeholder="Your name"/></div>
+        <div class="form-group"><label>Email</label><input type="email" id="cEmail" placeholder="your@email.com"/></div>
+        <div class="form-group full-form-group"><label>Subject</label>
+          <select id="cSubject">
+            <option>Inorganic Query</option>
+            <option>Analytical Query</option>
+            <option>General Question</option>
+            <option>Collaboration</option>
+          </select>
+        </div>
+        <div class="form-group full-form-group"><label>Message</label><textarea id="cMessage" rows="5" placeholder="Write your message…"></textarea></div>
+      </div>
+      <button class="btn-primary btn-gold" style="margin-top:1rem;width:100%" onclick="sendContact()">Send Message</button>
+    </div>
+    <div class="contact-info">
+      <div class="contact-item">
+        <div class="contact-icon">📚</div>
+        <div class="contact-text">
+          <h4>Office Hours</h4>
+          <p>Monday – Friday, 10am – 4pm</p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">🏛</div>
+        <div class="contact-text">
+          <h4>Department</h4>
+          <p>Department of Chemistry<br>Inorganic &amp; Analytical Division</p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">🎓</div>
+        <div class="contact-text">
+          <h4>Qualification</h4>
+          <p>M.Phil Candidate — Inorganic Analytical Chemistry</p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">⚗</div>
+        <div class="contact-text">
+          <h4>Research Focus</h4>
+          <p>Coordination compounds, spectroscopic analysis &amp; titrimetric methods</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+// ═══════════════════════════════════════════════════════
+// STATE & DATA
+// ═══════════════════════════════════════════════════════
+const ADMIN_PW = 'chemistry123';
+let isAdmin = false;
+let noteFilter = 'all', qaFilter = 'all', trickyFilter = 'all', discFilter = 'all';
+let currentAdvTab = 'tricky';
+
+const inorganicTopics = [
+  {icon:'⚛',name:'Periodic Table',desc:'Trends, properties & classification'},
+  {icon:'🔗',name:'Chemical Bonding',desc:'Ionic, covalent & metallic bonds'},
+  {icon:'🏛',name:'Coordination Compounds',desc:'Ligands, complexes & nomenclature'},
+  {icon:'🌀',name:'Transition Metals',desc:'d-block properties & reactions'},
+  {icon:'⚗',name:'Acids & Bases',desc:'Lewis, Brønsted & hard-soft theory'},
+  {icon:'⚡',name:'Electrochemistry',desc:'Cells, potentials & corrosion'},
+  {icon:'🔥',name:'Thermodynamics',desc:'Entropy, enthalpy & free energy'},
+  {icon:'↕',name:'Redox Reactions',desc:'Oxidation states & balancing'},
+];
+const analyticalTopics = [
+  {icon:'⚖',name:'Gravimetric Analysis',desc:'Mass-based quantitative techniques'},
+  {icon:'🧪',name:'Volumetric Analysis',desc:'Solution concentration methods'},
+  {icon:'🌈',name:'Spectroscopy',desc:'UV-Vis, IR & atomic absorption'},
+  {icon:'📊',name:'Chromatography',desc:'GC, HPLC & TLC separation'},
+  {icon:'💧',name:'Titration Methods',desc:'Acid-base, redox & complexometric'},
+  {icon:'🔭',name:'Instrumental Analysis',desc:'Modern analytical instruments'},
+  {icon:'🔍',name:'Qualitative Analysis',desc:'Identification of unknowns'},
+  {icon:'📐',name:'Quantitative Analysis',desc:'Precision measurement methods'},
+];
+
+function getLS(key,def){try{const v=localStorage.getItem(key);return v?JSON.parse(v):def}catch{return def}}
+function setLS(key,val){localStorage.setItem(key,JSON.stringify(val))}
+
+// ═══════════════════════════════════════════════════════
+// TOAST
+// ═══════════════════════════════════════════════════════
+function toast(msg,type='success'){
+  const c=document.getElementById('toastContainer');
+  const t=document.createElement('div');
+  t.className=`toast ${type}`;
+  const icons={success:'✓',error:'✕',info:'ℹ'};
+  t.innerHTML=`<span>${icons[type]||'ℹ'}</span> ${msg}`;
+  c.appendChild(t);
+  setTimeout(()=>{t.style.animation='slideOut 0.3s ease forwards';setTimeout(()=>t.remove(),300)},3500);
+}
+
+// ═══════════════════════════════════════════════════════
+// NAV
+// ═══════════════════════════════════════════════════════
+function toggleMenu(){document.getElementById('navLinks').classList.toggle('open')}
+function closeMenu(){document.getElementById('navLinks').classList.remove('open')}
+
+window.addEventListener('scroll',()=>{
+  const sections=['home','topics','notes','qa','advanced','discussion','about','contact'];
+  const scrollY=window.scrollY+80;
+  sections.forEach(id=>{
+    const el=document.getElementById(id);
+    if(!el)return;
+    const top=el.offsetTop,bottom=top+el.offsetHeight;
+    const link=document.querySelector(`.nav-links a[href="#${id}"]`);
+    if(link){link.classList.toggle('active',scrollY>=top&&scrollY<bottom)}
+  });
+});
+
+// ═══════════════════════════════════════════════════════
+// ADMIN
+// ═══════════════════════════════════════════════════════
+function handleAdminBtn(){
+  if(isAdmin){logoutAdmin()}else{document.getElementById('adminModal').classList.add('open');document.getElementById('adminPwInput').focus()}
+}
+function closeModal(){document.getElementById('adminModal').classList.remove('open');document.getElementById('adminPwInput').value='';document.getElementById('pwError').style.display='none'}
+function verifyAdmin(){
+  const pw=document.getElementById('adminPwInput').value;
+  if(pw===ADMIN_PW){
+    isAdmin=true;closeModal();
+    document.getElementById('navAdminBtn').textContent='🔓 Admin Active';
+    document.getElementById('navAdminBtn').classList.add('active');
+    document.querySelectorAll('.admin-zone,.admin-panel').forEach(el=>el.classList.add('visible'));
+    toast('Admin access granted. All features unlocked!','success');
+    renderAll();
+  }else{
+    document.getElementById('pwError').style.display='block';
+    document.getElementById('adminPwInput').value='';
+  }
+}
+function logoutAdmin(){
+  isAdmin=false;
+  document.getElementById('navAdminBtn').textContent='⚗ Admin Login';
+  document.getElementById('navAdminBtn').classList.remove('active');
+  document.querySelectorAll('.admin-zone,.admin-panel').forEach(el=>el.classList.remove('visible'));
+  toast('Logged out of admin.','info');
+}
+
+// ═══════════════════════════════════════════════════════
+// TOPICS
+// ═══════════════════════════════════════════════════════
+function renderTopics(){
+  const ig=document.getElementById('inorganicCards');
+  const ag=document.getElementById('analyticalCards');
+  ig.innerHTML=inorganicTopics.map(t=>`
+    <div class="topic-card tc-teal">
+      <div class="topic-card-icon">${t.icon}</div>
+      <div class="topic-card-name">${t.name}</div>
+      <div class="topic-card-desc">${t.desc}</div>
+    </div>`).join('');
+  ag.innerHTML=analyticalTopics.map(t=>`
+    <div class="topic-card tc-gold">
+      <div class="topic-card-icon">${t.icon}</div>
+      <div class="topic-card-name">${t.name}</div>
+      <div class="topic-card-desc">${t.desc}</div>
+    </div>`).join('');
+}
+
+// ═══════════════════════════════════════════════════════
+// NOTES
+// ═══════════════════════════════════════════════════════
+const DEFAULT_NOTES=[
+  {id:'n1',title:'Periodic Table Trends & Properties',subject:'inorganic',pages:18,url:'https://drive.google.com/file/d/demo1',icon:'⚛'},
+  {id:'n2',title:'Chemical Bonding — Complete Guide',subject:'inorganic',pages:24,url:'https://drive.google.com/file/d/demo2',icon:'🔗'},
+  {id:'n3',title:'Coordination Compounds & Ligands',subject:'inorganic',pages:32,url:'https://drive.google.com/file/d/demo3',icon:'🏛'},
+  {id:'n4',title:'Transition Metals & d-Block Chemistry',subject:'inorganic',pages:28,url:'https://drive.google.com/file/d/demo4',icon:'🌀'},
+  {id:'n5',title:'Gravimetric Analysis Methods',subject:'analytical',pages:16,url:'https://drive.google.com/file/d/demo5',icon:'⚖'},
+  {id:'n6',title:'Spectroscopy — UV-Vis & IR',subject:'analytical',pages:22,url:'https://drive.google.com/file/d/demo6',icon:'🌈'},
+  {id:'n7',title:'Titration Methods & Calculations',subject:'analytical',pages:20,url:'https://drive.google.com/file/d/demo7',icon:'💧'},
+  {id:'n8',title:'Chromatography Techniques',subject:'analytical',pages:19,url:'https://drive.google.com/file/d/demo8',icon:'📊'},
+];
+
+function getNotes(){return getLS('chemsphere_notes',DEFAULT_NOTES)}
+function filterNotes(f,btn){
+  noteFilter=f;
+  document.querySelectorAll('#notesFilter .filter-btn').forEach(b=>b.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  renderNotes();
+}
+function renderNotes(){
+  const notes=getNotes().filter(n=>noteFilter==='all'||n.subject===noteFilter);
+  const grid=document.getElementById('notesGrid');
+  if(!notes.length){grid.innerHTML='<div class="empty-state"><div class="empty-icon">📄</div><p>No notes found.</p></div>';return}
+  grid.innerHTML=notes.map(n=>`
+    <div class="note-card ${n.subject==='inorganic'?'nc-teal':'nc-gold'}">
+      <div class="note-icon">${n.icon||'📄'}</div>
+      <div class="note-title">${n.title}</div>
+      <div class="note-meta">
+        <span class="note-tag ${n.subject==='inorganic'?'nt-inorganic':'nt-analytical'}">${n.subject==='inorganic'?'⚛ Inorganic':'🔬 Analytical'}</span>
+        <span class="note-pages">📖 ${n.pages} pages</span>
+      </div>
+      <a href="${n.url}" target="_blank" class="btn-download ${n.subject==='analytical'?'gold':''}">⬇ Download PDF</a>
+    </div>`).join('');
+}
+
+function addNote(){
+  const title=document.getElementById('noteTitle').value.trim();
+  const subject=document.getElementById('noteSubject').value;
+  const pages=document.getElementById('notePages').value||'?';
+  const url=document.getElementById('noteDriveUrl').value.trim()||'#';
+  const fileInput=document.getElementById('notePdfFile');
+  if(!title){toast('Please enter a note title.','error');return}
+  const notes=getNotes();
+  const icons={inorganic:'⚛',analytical:'🔬'};
+  const newNote={id:'n'+Date.now(),title,subject,pages:parseInt(pages)||0,url,icon:icons[subject]||'📄'};
+  if(fileInput.files[0]){newNote.url=URL.createObjectURL(fileInput.files[0]);newNote.localFile=true}
+  notes.unshift(newNote);
+  setLS('chemsphere_notes',notes);
+  document.getElementById('noteTitle').value='';
+  document.getElementById('notePages').value='';
+  document.getElementById('noteDriveUrl').value='';
+  fileInput.value='';
+  renderNotes();
+  updateStats();
+  toast('Note card added successfully!','success');
+}
+
+// ═══════════════════════════════════════════════════════
+// Q&A BOARD
+// ═══════════════════════════════════════════════════════
+const DEFAULT_QA=[
+  {id:'q1',question:'Why do transition metals form coloured compounds?',answer:'Transition metals have partially filled d orbitals. When ligands approach the metal ion, they split the d orbitals into energy levels. Electrons can absorb visible light and jump between these levels — the complementary colour is what we observe. The specific colour depends on the metal, its oxidation state, and the nature of the ligands.',tag:'inorganic',date:'2025-03-15',helpful:12,image:null},
+  {id:'q2',question:'What is the difference between precision and accuracy in analytical chemistry?',answer:'Accuracy refers to how close a measurement is to the true or accepted value. Precision refers to the reproducibility of measurements — how close repeated measurements are to each other. A method can be precise but not accurate (systematic error), accurate but not precise (random error), or ideally both.',tag:'analytical',date:'2025-03-10',helpful:8,image:null},
+];
+
+function getQA(){return getLS('chemsphere_qa',DEFAULT_QA)}
+function filterQA(f,btn){
+  qaFilter=f;
+  document.querySelectorAll('#qaFilter .filter-btn').forEach(b=>b.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  renderQA();
+}
+function renderQA(){
+  const items=getQA().filter(q=>qaFilter==='all'||q.tag===qaFilter);
+  const board=document.getElementById('qaBoard');
+  if(!items.length){board.innerHTML='<div class="empty-state"><div class="empty-icon">❓</div><p>No Q&amp;As posted yet.</p></div>';return}
+  board.innerHTML=items.map(q=>`
+    <div class="qa-card ${q.tag}">
+      <div class="qa-question">Q: ${q.question}</div>
+      <div class="qa-answer">${q.answer}</div>
+      ${q.image?`<img src="${q.image}" class="qa-image" alt="Q&A image"/>`:''}
+      <div class="qa-footer">
+        <span class="note-tag ${q.tag==='inorganic'?'nt-inorganic':'nt-analytical'}">${q.tag==='inorganic'?'⚛ Inorganic':'🔬 Analytical'}</span>
+        <span class="qa-date">${q.date}</span>
+        <button class="helpful-btn ${(getLS('chemsphere_helpful',{})[q.id])?'clicked':''}" onclick="markHelpful('${q.id}',this)">
+          👍 I found this helpful <span id="hc_${q.id}">${q.helpful}</span>
+        </button>
+        ${isAdmin?`<button onclick="deleteQA('${q.id}')" style="background:none;border:none;color:var(--text3);cursor:pointer;font-size:0.8rem">🗑 Delete</button>`:''}
+      </div>
+    </div>`).join('');
+}
+
+function markHelpful(id,btn){
+  const helped=getLS('chemsphere_helpful',{});
+  if(helped[id]){toast('Already marked as helpful.','info');return}
+  helped[id]=true;setLS('chemsphere_helpful',helped);
+  const qa=getQA();const idx=qa.findIndex(q=>q.id===id);
+  if(idx>-1){qa[idx].helpful=(qa[idx].helpful||0)+1;setLS('chemsphere_qa',qa)}
+  const counter=document.getElementById('hc_'+id);
+  if(counter)counter.textContent=parseInt(counter.textContent)+1;
+  btn.classList.add('clicked');
+  toast('Thank you for your feedback!','success');
+}
+
+function deleteQA(id){
+  const qa=getQA().filter(q=>q.id!==id);setLS('chemsphere_qa',qa);renderQA();updateStats();toast('Q&A deleted.','info');
+}
+
+function postQA(){
+  const question=document.getElementById('qaQuestion').value.trim();
+  const answer=document.getElementById('qaAnswer').value.trim();
+  const tag=document.getElementById('qaTag').value;
+  const imageFile=document.getElementById('qaImage').files[0];
+  if(!question||!answer){toast('Please fill in both question and answer.','error');return}
+  const finish=(imgData)=>{
+    const qa=getQA();
+    qa.unshift({id:'q'+Date.now(),question,answer,tag,date:new Date().toISOString().split('T')[0],helpful:0,image:imgData||null});
+    setLS('chemsphere_qa',qa);
+    document.getElementById('qaQuestion').value='';
+    document.getElementById('qaAnswer').value='';
+    document.getElementById('qaImage').value='';
+    renderQA();updateStats();toast('Q&A posted!','success');
+  };
+  if(imageFile){const r=new FileReader();r.onload=e=>finish(e.target.result);r.readAsDataURL(imageFile);}else finish(null);
+}
+
+// ═══════════════════════════════════════════════════════
+// ADVANCED ZONE
+// ═══════════════════════════════════════════════════════
+const DEFAULT_TRICKY=[
+  {id:'t1',question:'A transition metal complex absorbs light at 450 nm (blue). What colour does it appear, and why?',answer:'It appears orange — the complementary colour of blue. When a substance absorbs blue light (~450 nm), the remaining transmitted/reflected wavelengths correspond to orange on the colour wheel. This is the basis of colour in d-d transitions.',tag:'inorganic',diff:'hard',stumped:3},
+  {id:'t2',question:'In a back-titration, you add excess standard acid to dissolve a sample, then titrate the excess with standard alkali. Why not just titrate directly?',answer:'Direct titration is impossible when: the analyte reacts too slowly, the endpoint is difficult to detect in the direct reaction, the analyte is insoluble in water but dissolves in excess acid, or the direct titration product interferes. Back titrations circumvent these issues by titrating the unreacted reagent.',tag:'analytical',diff:'expert',stumped:7},
+];
+const DEFAULT_DANGER=[
+  {id:'d1',title:'Fluorine — The Most Reactive Element',body:'Elemental fluorine (F₂) is so electronegative and reactive it attacks glass, causes metals to spontaneously combust, and reacts explosively with water. Its small atomic radius and high nuclear charge create an unusually strong electrostatic pull. Even noble gases like xenon and krypton react with it under certain conditions.',dangerLevel:'extreme',tag:'inorganic'},
+  {id:'d2',title:'Aqua Regia — Dissolving Gold',body:'Aqua regia (3:1 HCl:HNO₃ mixture) dissolves gold and platinum, which resist all other acids individually. HNO₃ oxidizes the metal surface while HCl provides chloride ions that form stable chloro-complexes (e.g. AuCl₄⁻), removing the oxidized layer and exposing fresh metal. The reaction produces toxic NOCl and Cl₂ gases.',dangerLevel:'hazardous',tag:'inorganic'},
+];
+
+function getTricky(){return getLS('chemsphere_tricky',DEFAULT_TRICKY)}
+function getDanger(){return getLS('chemsphere_danger',DEFAULT_DANGER)}
+
+function showAdvTab(tab,btn){
+  currentAdvTab=tab;
+  document.querySelectorAll('.adv-tab').forEach(b=>b.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  document.getElementById('trickySection').style.display=tab==='tricky'?'block':'none';
+  document.getElementById('dangerSection').style.display=tab==='danger'?'block':'none';
+}
+
+function filterTricky(f,btn){
+  trickyFilter=f;
+  document.querySelectorAll('#trickySection .filter-btn').forEach(b=>b.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  renderTricky();
+}
+
+function renderTricky(){
+  const items=getTricky().filter(t=>trickyFilter==='all'||t.tag===trickyFilter);
+  const board=document.getElementById('trickyBoard');
+  if(!items.length){board.innerHTML='<div class="empty-state"><div class="empty-icon">🧠</div><p>No tricky questions yet.</p></div>';return}
+  board.innerHTML=items.map(t=>`
+    <div class="tricky-card">
+      <span class="diff-badge ${t.diff==='expert'?'diff-expert':'diff-hard'}">${t.diff==='expert'?'⚠ Expert':'● Hard'}</span>
+      <span class="note-tag ${t.tag==='inorganic'?'nt-inorganic':'nt-analytical'}" style="margin-left:0.5rem">${t.tag==='inorganic'?'⚛ Inorganic':'🔬 Analytical'}</span>
+      <div class="tricky-q" style="margin-top:0.75rem">${t.question}</div>
+      <div class="tricky-answer" id="ta_${t.id}">${t.answer}</div>
+      <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-top:0.75rem">
+        <button class="btn-reveal" onclick="toggleAnswer('${t.id}',this)">👁 Reveal Answer</button>
+        <button class="stumped-btn" onclick="markStumped('${t.id}',this)">🤯 This stumped me <span>(${t.stumped||0})</span></button>
+        ${isAdmin?`<button onclick="deleteTricky('${t.id}')" style="background:none;border:none;color:var(--text3);cursor:pointer;font-size:0.8rem">🗑</button>`:''}
+      </div>
+    </div>`).join('');
+}
+
+function toggleAnswer(id,btn){
+  const el=document.getElementById('ta_'+id);
+  const shown=el.classList.toggle('shown');
+  btn.textContent=shown?'🙈 Hide Answer':'👁 Reveal Answer';
+}
+
+function markStumped(id,btn){
+  const key='chemsphere_stumped';
+  const s=getLS(key,{});
+  if(s[id]){toast('Already recorded!','info');return}
+  s[id]=true;setLS(key,s);
+  const t=getTricky();const idx=t.findIndex(x=>x.id===id);
+  if(idx>-1){t[idx].stumped=(t[idx].stumped||0)+1;setLS('chemsphere_tricky',t)}
+  const counter=btn.querySelector('span');
+  if(counter)counter.textContent=`(${parseInt(counter.textContent.replace(/[()]/g,''))+1})`;
+  toast('Response recorded!','success');
+}
+
+function deleteTricky(id){
+  const t=getTricky().filter(x=>x.id!==id);setLS('chemsphere_tricky',t);renderTricky();toast('Deleted.','info');
+}
+
+function renderDanger(){
+  const items=getDanger();
+  const board=document.getElementById('dangerBoard');
+  if(!items.length){board.innerHTML='<div class="empty-state"><div class="empty-icon">☣</div><p>No posts yet.</p></div>';return}
+  const dlClass={caution:'dl-caution',hazardous:'dl-hazardous',extreme:'dl-extreme'};
+  const dlLabel={caution:'⚠ Caution',hazardous:'☣ Hazardous',extreme:'💀 Extreme'};
+  board.innerHTML=items.map(d=>`
+    <div class="danger-card">
+      <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap">
+        <span class="danger-badge ${dlClass[d.dangerLevel]}">${dlLabel[d.dangerLevel]}</span>
+        <span class="note-tag ${d.tag==='inorganic'?'nt-inorganic':'nt-analytical'}">${d.tag==='inorganic'?'⚛ Inorganic':'🔬 Analytical'}</span>
+        ${isAdmin?`<button onclick="deleteDanger('${d.id}')" style="background:none;border:none;color:var(--text3);cursor:pointer;font-size:0.8rem;margin-left:auto">🗑</button>`:''}
+      </div>
+      <div class="danger-title">${d.title}</div>
+      <div class="danger-body">${d.body}</div>
+    </div>`).join('');
+}
+
+function deleteDanger(id){
+  const d=getDanger().filter(x=>x.id!==id);setLS('chemsphere_danger',d);renderDanger();toast('Deleted.','info');
+}
+
+function updateAdvForm(){
+  const type=document.getElementById('advType').value;
+  document.querySelectorAll('.adv-tricky-field').forEach(el=>el.style.display=type==='tricky'?'':'none');
+  document.querySelectorAll('.adv-danger-field').forEach(el=>el.style.display=type==='danger'?'':'none');
+}
+
+function postAdvanced(){
+  const type=document.getElementById('advType').value;
+  const tag=document.getElementById('advTag').value;
+  if(type==='tricky'){
+    const question=document.getElementById('advQuestion').value.trim();
+    const answer=document.getElementById('advAnswer').value.trim();
+    const diff=document.getElementById('advDiff').value;
+    if(!question||!answer){toast('Fill in question and answer.','error');return}
+    const t=getTricky();
+    t.unshift({id:'t'+Date.now(),question,answer,tag,diff,stumped:0});
+    setLS('chemsphere_tricky',t);
+    document.getElementById('advQuestion').value='';
+    document.getElementById('advAnswer').value='';
+    renderTricky();toast('Tricky question posted!','success');
+  }else{
+    const title=document.getElementById('advDangerTitle').value.trim();
+    const body=document.getElementById('advDangerBody').value.trim();
+    const dangerLevel=document.getElementById('advDangerLevel').value;
+    if(!title||!body){toast('Fill in title and explanation.','error');return}
+    const d=getDanger();
+    d.unshift({id:'d'+Date.now(),title,body,tag,dangerLevel});
+    setLS('chemsphere_danger',d);
+    document.getElementById('advDangerTitle').value='';
+    document.getElementById('advDangerBody').value='';
+    renderDanger();toast('Dangerous chemistry post added!','success');
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// DISCUSSION BOARD
+// ═══════════════════════════════════════════════════════
+function getDiscs(){return getLS('chemsphere_disc',[])}
+function filterDisc(f,btn){
+  discFilter=f;
+  document.querySelectorAll('#discFilter .filter-btn').forEach(b=>b.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  renderDisc();
+}
+function postDisc(){
+  const name=document.getElementById('discName').value.trim();
+  const message=document.getElementById('discMessage').value.trim();
+  const topic=document.getElementById('discTopic').value;
+  if(!name||!message){toast('Please enter your name and message.','error');return}
+  const discs=getDiscs();
+  const uid='d'+Date.now();
+  discs.unshift({id:uid,name,message,topic,time:new Date().toLocaleString(),likes:0,replies:[]});
+  setLS('chemsphere_disc',discs);
+  document.getElementById('discName').value='';
+  document.getElementById('discMessage').value='';
+  renderDisc();toast('Post published!','success');
+}
+function renderDisc(){
+  const discs=getDiscs().filter(d=>discFilter==='all'||d.topic===discFilter);
+  const board=document.getElementById('discBoard');
+  const tagClass={inorganic:'dt-inorganic',analytical:'dt-analytical',general:'dt-general'};
+  const likedKey='chemsphere_disc_liked';
+  const liked=getLS(likedKey,{});
+  if(!discs.length){board.innerHTML='<div class="empty-state"><div class="empty-icon">💬</div><p>No posts yet. Start a discussion!</p></div>';return}
+  board.innerHTML=discs.map(d=>`
+    <div class="disc-card" id="disc_${d.id}">
+      <div class="disc-meta">
+        <span class="disc-name">👤 ${d.name}</span>
+        <span class="disc-time">${d.time}</span>
+        <span class="disc-topic-tag ${tagClass[d.topic]||'dt-general'}">${d.topic}</span>
+      </div>
+      <div class="disc-message">${d.message}</div>
+      <div class="disc-actions">
+        <button class="disc-action-btn ${liked[d.id]?'liked':''}" onclick="likeDisc('${d.id}',this)">
+          👍 <span id="lc_${d.id}">${d.likes}</span>
+        </button>
+        <button class="disc-action-btn" onclick="toggleReplyForm('${d.id}')">💬 Reply (${(d.replies||[]).length})</button>
+        <button class="disc-action-btn delete" onclick="deleteDisc('${d.id}')">🗑 Delete</button>
+      </div>
+      <div class="replies-section" id="replies_${d.id}" style="display:none">
+        ${(d.replies||[]).map(r=>`
+          <div class="reply-card">
+            <div class="reply-name">👤 ${r.name}</div>
+            <div class="reply-msg">${r.message}</div>
+          </div>`).join('')}
+        <div class="reply-form">
+          <input type="text" placeholder="Your name" id="rn_${d.id}"/>
+          <input type="text" placeholder="Your reply…" id="rm_${d.id}" onkeydown="if(event.key==='Enter')postReply('${d.id}')"/>
+          <button onclick="postReply('${d.id}')">Send</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+function likeDisc(id,btn){
+  const likedKey='chemsphere_disc_liked';
+  const liked=getLS(likedKey,{});
+  if(liked[id]){toast('Already upvoted.','info');return}
+  liked[id]=true;setLS(likedKey,liked);
+  const discs=getDiscs();const idx=discs.findIndex(d=>d.id===id);
+  if(idx>-1){discs[idx].likes=(discs[idx].likes||0)+1;setLS('chemsphere_disc',discs)}
+  const counter=document.getElementById('lc_'+id);
+  if(counter)counter.textContent=parseInt(counter.textContent)+1;
+  btn.classList.add('liked');
+  toast('Upvoted!','success');
+}
+function toggleReplyForm(id){
+  const el=document.getElementById('replies_'+id);
+  el.style.display=el.style.display==='none'?'block':'none';
+}
+function postReply(id){
+  const name=document.getElementById('rn_'+id).value.trim();
+  const message=document.getElementById('rm_'+id).value.trim();
+  if(!name||!message){toast('Enter name and reply.','error');return}
+  const discs=getDiscs();const idx=discs.findIndex(d=>d.id===id);
+  if(idx>-1){if(!discs[idx].replies)discs[idx].replies=[];discs[idx].replies.push({name,message,time:new Date().toLocaleString()});}
+  setLS('chemsphere_disc',discs);renderDisc();
+  document.getElementById('replies_'+id).style.display='block';
+  toast('Reply posted!','success');
+}
+function deleteDisc(id){
+  const discs=getDiscs().filter(d=>d.id!==id);setLS('chemsphere_disc',discs);renderDisc();toast('Post deleted.','info');
+}
+
+// ═══════════════════════════════════════════════════════
+// ABOUT STATS
+// ═══════════════════════════════════════════════════════
+function updateStats(){
+  const notes=getNotes().length;
+  const qa=getQA().length;
+  const topics=inorganicTopics.length+analyticalTopics.length;
+  const discs=getDiscs().length;
+  const el=document.getElementById('aboutStats');
+  if(el)el.innerHTML=`
+    <div class="stat-card"><div class="stat-num" style="color:var(--teal)">${notes}</div><div class="stat-label">Notes Available</div></div>
+    <div class="stat-card"><div class="stat-num" style="color:var(--gold)">${topics}</div><div class="stat-label">Topics Covered</div></div>
+    <div class="stat-card"><div class="stat-num" style="color:var(--purple)">${qa}</div><div class="stat-label">Q&amp;As Posted</div></div>
+    <div class="stat-card"><div class="stat-num" style="color:var(--orange)">${discs}</div><div class="stat-label">Discussions</div></div>
+  `;
+}
+
+// ═══════════════════════════════════════════════════════
+// CONTACT
+// ═══════════════════════════════════════════════════════
+function sendContact(){
+  const n=document.getElementById('cName').value.trim();
+  const e=document.getElementById('cEmail').value.trim();
+  const m=document.getElementById('cMessage').value.trim();
+  if(!n||!e||!m){toast('Please fill in all fields.','error');return}
+  document.getElementById('cName').value='';
+  document.getElementById('cEmail').value='';
+  document.getElementById('cMessage').value='';
+  toast('Message sent! Your teacher will respond soon.','success');
+}
+
+// ═══════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════
+function renderAll(){
+  renderTopics();
+  renderNotes();
+  renderQA();
+  renderTricky();
+  renderDanger();
+  renderDisc();
+  updateStats();
+}
+renderAll();
+</script>
+</body>
+</html>
